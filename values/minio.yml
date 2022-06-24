@@ -1,0 +1,22 @@
+## Refs: https://github.com/bitnami/charts/blob/master/bitnami/minio/values.yaml
+## Enable persistence using Persistent Volume Claims
+## ref: http://kubernetes.io/docs/user-guide/persistent-volumes/
+##
+persistence:
+  ## @param persistence.enabled Enable MinIO&reg; data persistence using PVC. If false, use emptyDir
+  ##
+  enabled: false
+
+## @param defaultBuckets Comma, semi-colon or space separated list of buckets to create at initialization (only in standalone mode)
+## e.g:
+## defaultBuckets: "my-bucket, my-second-bucket"
+##
+defaultBuckets: "${bucket_name}"
+
+## MinIO&reg; authentication parameters
+##
+auth:
+  ## @param auth.existingSecret Use existing secret for credentials details (`auth.rootUser` and `auth.rootPassword` will be ignored and picked up from this secret). The secret has to contain the keys `root-user` and `root-password`)
+  ##
+  existingSecret: "${secret_name}"
+
