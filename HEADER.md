@@ -11,7 +11,7 @@ in the same namespace of the runner, to host the Runner cache.
 
 This module is provided without any kind of warranty and is GPL3 licensed.
 
-# Configuration of the Helm and Kubernetes providers
+## Configuration of the Helm and Kubernetes providers
 
 ```
 provider "kubernetes" {
@@ -28,3 +28,25 @@ provider "helm" {
   }
 }
 ```
+
+## Configuration options.
+
+This module allows the installation of a runner on a GKE cluster and is rather
+opinionated although it is highly configurable.
+
+A workload identity is used that assigns default permissions to the runner,
+permissions that should allow applications to be installed in the cluster.
+
+It is possible to override the permissions by changing the default roles entered
+in the `runner_default_roles` variable or by adding them to the `runner_additional_roles` variable.
+
+If the runner needs to be able to access a CloudSQL instance or deploy 
+applications to cloud run it is sufficient to enable two options by setting 
+the two variables `runner_consent_cloud_sql_dumps` and `runner_consent_deploy_cloudrun_apps` to true.
+
+The module supports the creation of a service account with cluster admin role needed 
+for cluster integration in GitLab as described in the [official 
+documentation](https://docs.gitlab.com/ee/user/project/clusters/add_existing_cluster.html) (`create_gitlab_k8s_integration_service_account`).
+
+Finally, it is possible to install multiple runners on the same cluster by 
+adding a suffix to the created resources (`resources_suffix`).
