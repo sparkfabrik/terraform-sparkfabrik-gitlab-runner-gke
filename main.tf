@@ -10,7 +10,9 @@ locals {
   gitlab_helm_release_name           = var.resources_suffix != "" ? "${var.helm_release_name}-${var.resources_suffix}" : var.helm_release_name
   minio_helm_release_name            = var.resources_suffix != "" ? "bitnami-${var.resources_suffix}" : "bitnami"
 
-  # Permissions needed to dump databases using `gcloud sql export sql` command.
+  # Permissions needed to dump databases using `gcloud sql export sql` command. 
+  # Remember that the CloudSQL service account will need to be able to access the
+  # bucket to write dumps to it.
   permissions_allow_cloudsql_database_dumps = [
     "cloudsql.instances.export",
     "cloudsql.instances.get",
