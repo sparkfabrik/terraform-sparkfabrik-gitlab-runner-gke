@@ -117,7 +117,7 @@ resource "google_project_iam_custom_role" "gitlab_runner_custom_role" {
 # Reference https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/tree/v16.1.0/modules/workload-identity
 module "gitlab_runner_workload_identity_mapping" {
   source     = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
-  version    = "16.1.0"
+  version    = "16.1.1"
   name       = local.workload_identity_name
   namespace  = local.runner_namespace
   project_id = var.project_id
